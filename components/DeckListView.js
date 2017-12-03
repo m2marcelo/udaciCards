@@ -29,6 +29,16 @@ class DeckListView extends Component {
 
   loadDecks = () => getDecks().then(data => this.setState({decks: data}));
 
+  openDeckDetails = deck => {
+    this.props.navigation.navigate(
+      'DeckDetails',
+      {
+        deckId: deck.key,
+        title: deck.title
+      }
+    )
+  }
+
   render() {
     const { decks } = this.state;
 
@@ -49,7 +59,7 @@ class DeckListView extends Component {
         data={data}
         renderItem={
           ({item}) => (
-          <DeckItem onPressItem={console.log('decks pressed')} item={item}/>)
+          <DeckItem onPressItem={this.openDeckDetails} item={item}/>)
         }
       />
     )

@@ -8,6 +8,7 @@ import { FontAwesome, Ionicons, MaterialCommunityIcons } from '@expo/vector-icon
 
 import NewDeck from './components/NewDeck'
 import DeckListView from './components/DeckListView'
+import DeckDetails from './components/DeckDetails'
 
 function CardsStatusBar ({backgroundColor, ...props}) {
   return (
@@ -55,12 +56,27 @@ const Tabs = TabNavigator({
   }
 })
 
+const MainNavigator = StackNavigator({
+  Home: {
+    screen: Tabs,
+  },
+  DeckDetails: {
+    screen: DeckDetails,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      },
+    },
+  },
+});
+
 export default class App extends React.Component {
   render() {
     return (
       <View style={{flex: 1}}>
         <CardsStatusBar backgroundColor={blue} barStyle='light-content'/>
-        <Tabs />
+        <MainNavigator />
       </View>
     );
   }

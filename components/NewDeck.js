@@ -24,7 +24,8 @@ class NewDeck extends Component{
         const resetAction = NavigationActions.reset({
           index: 1,
           actions: [
-            NavigationActions.navigate({ routeName: 'DeckListView' }),
+            NavigationActions.navigate({ routeName: 'Home' }),
+            NavigationActions.navigate({ routeName: 'DeckDetails', params: {deckId: deck.key, title: deck.title}})
           ]
         })
         this.props.navigation.dispatch(resetAction);

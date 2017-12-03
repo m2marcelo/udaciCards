@@ -33,6 +33,9 @@ class DeckDetails extends Component {
   }
 
   addCard = () => {
+    const { navigation } = this.props;
+    const { deckId } = navigation.state.params;
+    navigation.navigate('AddCard', {deckId});
   }
 
   startQuiz = () => {

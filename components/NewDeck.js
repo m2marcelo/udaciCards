@@ -38,7 +38,7 @@ class NewDeck extends Component{
       <KeyboardAvoidingView behavior={'padding'} style={{flex: 1}}>
         <View style={styles.container}>
           <Text style={styles.newDeckHeader}>
-            What is the title of your new deck? POrra
+            What is the title of your new deck?
           </Text>
           <TextInput
             style={styles.deckTitle}

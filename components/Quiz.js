@@ -3,9 +3,10 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import FlipCard from 'react-native-flip-card';
 import { getDeck } from '../utils/api';
-import { black, green, red, white } from '../utils/colors';
+import { black, green, grey, red, white } from '../utils/colors';
 
 import TextButton from './TextButton';
+import Results from './Results';
 
 class Quiz extends Component {
   state = {
@@ -40,8 +41,8 @@ class Quiz extends Component {
       const nextQuestion = currentQuestion + 1;
 
       return {
-      currentQuestion: nextQuestion,
-      score: newScore
+        currentQuestion: nextQuestion,
+        score: newScore
       }
     })
   };
@@ -61,36 +62,55 @@ class Quiz extends Component {
       <View style={styles.container}>
         {!showScore && <Text style={styles.topLeftText}>{currentQuestion + 1} / {questonsCount}</Text>}
         <View style={styles.textsContainer}>
+          {showScore ? (
+            <Results percentage={ parseInt(score / questonsCount * 100) }/>
+          ) : (
           <View style={{height: 0}}>
             <FlipCard style={{borderWidth: 0}}>
               <View style={{alignItems: 'center'}}>
-                <Text style={styles.subtitle}>Question</Text>
+               <Text style={styles.textToFlip}>Press here to show the answer</Text>
                 <Text style={styles.title}>{question.question}</Text>
-                <Text>Show answer</Text>
               </View>
               <View style={{alignItems: 'center'}}>
-                <Text style={styles.subtitle}>Answer:</Text>
+                <Text style={styles.textToFlip}>Press here to show the question</Text>
                 <Text style={styles.title}>{question.answer}</Text>
-                <Text>Show question</Text>
               </View>
             </FlipCard>
           </View>
+        )}
         </View>
         <View style={styles.buttonsContainer}>
-        <View>
-          <TextButton
-            onPress={() => this.saveResult(true)}
-            style={[styles.button, styles.buttonGreen]}
-          >
-            Correct
-          </TextButton>
-          <TextButton
-            onPress={() => this.saveResult()}
-            style={[styles.button, styles.buttonRed]}
-          >
-            Incorrect
-          </TextButton>
-        </View>
+        {showScore ? (
+          <View>
+            <TextButton
+              onPress={this.goBack}
+              style={[styles.button, styles.buttonWhite]}
+              inverted>
+              Back to Deck
+            </TextButton>
+            <TextButton
+              onPress={this.restartQuiz}
+              style={[styles.button, styles.buttonBlack]}
+            >
+              Restart Quiz
+            </TextButton>
+          </View>
+          ) : (
+          <View>
+            <TextButton
+              onPress={() => this.saveResult(true)}
+              style={[styles.button, styles.buttonGreen]}
+            >
+              Correct
+            </TextButton>
+            <TextButton
+              onPress={() => this.saveResult()}
+              style={[styles.button, styles.buttonRed]}
+            >
+              Incorrect
+            </TextButton>
+          </View>
+        )}
       </View>
     </View>
     )
@@ -101,6 +121,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center'
+  },
+  textToFlip: {
+    color: red,
+    fontSize: 18,
+    fontWeight: 'bold'
   },
   textsContainer: {
     flex: 1,
@@ -145,6 +170,14 @@ const styles = StyleSheet.create({
   buttonGreen: {
     backgroundColor: green,
     color: white,
+  },
+  buttonBlack: {
+    backgroundColor: black,
+    color: white,
+  },
+  buttonWhite: {
+    backgroundColor: white,
+    color: black,
   },
 });
 

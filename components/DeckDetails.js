@@ -69,7 +69,7 @@ class DeckDetails extends Component {
             Add Card
           </TextButton>
           <TextButton
-            style={[styles.button, styles.buttonBlack]}
+            style={[styles.button, styles.buttonBlack, styles.buttonsContainer]}
             disabled={deck.questions.length === 0}
             onPress={this.startQuiz}
           >
@@ -93,7 +93,6 @@ class DeckDetails extends Component {
     },
     buttonsContainer: {
       marginBottom: 25,
-      width: 200
     },
     title: {
       fontSize: 30,

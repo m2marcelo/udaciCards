@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, DeviceEventEmitter } from 'react-native';
 import { getDeck } from '../utils/api';
+import { black, white } from '../utils/colors'
 import TextButton from './TextButton';
 
 class DeckDetails extends Component {
@@ -58,10 +59,14 @@ class DeckDetails extends Component {
           </Text>
         </View>
         <View style={styles.buttonsContainer}>
-          <TextButton onPress={this.addCard} style={{marginBottom: 15}} inverted>
+          <TextButton onPress={this.addCard} style={[styles.button, styles.buttonWhite]} inverted>
             Add Card
           </TextButton>
-          <TextButton disabled={deck.questions.length === 0} onPress={this.startQuiz}>
+          <TextButton
+            style={[styles.button, styles.buttonBlack]}
+            disabled={deck.questions.length === 0}
+            onPress={this.startQuiz}
+          >
             Start Quiz
           </TextButton>
         </View>
@@ -92,7 +97,24 @@ class DeckDetails extends Component {
     subtitle: {
       color: 'grey',
       fontSize: 20
-    }
+    },
+    button: {
+      marginTop: 30,
+      fontSize: 25,
+      width: 200,
+      padding: 15,
+      borderColor: black,
+      borderRadius: 6,
+      borderWidth: 0.5,
+    },
+    buttonBlack: {
+      backgroundColor: black,
+      color: white,
+    },
+    buttonWhite: {
+      backgroundColor: white,
+      color: black,
+    },
   });
 
 export default DeckDetails;

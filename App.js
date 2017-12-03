@@ -12,6 +12,8 @@ import DeckDetails from './components/DeckDetails'
 import AddCard from './components/AddCard'
 import Quiz from './components/Quiz'
 
+import { setLocalNotification } from './utils/notifications';
+
 
 function CardsStatusBar ({backgroundColor, ...props}) {
   return (
@@ -93,6 +95,11 @@ const MainNavigator = StackNavigator({
 });
 
 export default class App extends React.Component {
+
+  componentDidMount() {
+    setLocalNotification()
+  }
+
   render() {
     return (
       <View style={{flex: 1}}>

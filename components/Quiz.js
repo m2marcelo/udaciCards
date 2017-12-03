@@ -5,6 +5,11 @@ import FlipCard from 'react-native-flip-card';
 import { getDeck } from '../utils/api';
 import { black, green, grey, red, white } from '../utils/colors';
 
+import {
+  clearLocalNotification,
+  setLocalNotification
+} from '../utils/notifications';
+
 import TextButton from './TextButton';
 import Results from './Results';
 
@@ -37,8 +42,13 @@ class Quiz extends Component {
 
   saveResult(correct = false) {
     this.setState(({score, currentQuestion, deck}) => {
-      const newScore = correct ? score + 1 : score;
-      const nextQuestion = currentQuestion + 1;
+      const newScore = correct ? score + 1 : score
+      const nextQuestion = currentQuestion + 1
+
+      if (nextQuestion  === deck.questions.length) {
+        clearLocalNotification()
+          .then(setLocalNotification);
+      }
 
       return {
         currentQuestion: nextQuestion,

@@ -4,10 +4,7 @@ UdaciCards - React Native app for Udacity React Nanodegree
 
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
-Below you'll find information about performing common tasks. The most recent version of this guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).
-
-
-## Prerequisites
+## Dependencies
 
 To run this project, you will need to have Node.js and yarn installed in your machine.
 

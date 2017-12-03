@@ -9,7 +9,8 @@ import { FontAwesome, Ionicons, MaterialCommunityIcons } from '@expo/vector-icon
 import NewDeck from './components/NewDeck'
 import DeckListView from './components/DeckListView'
 import DeckDetails from './components/DeckDetails'
-import AddCard from './components/AddCard';
+import AddCard from './components/AddCard'
+import Quiz from './components/Quiz'
 
 
 function CardsStatusBar ({backgroundColor, ...props}) {
@@ -73,6 +74,15 @@ const MainNavigator = StackNavigator({
   },
   AddCard: {
     screen: AddCard,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      },
+    },
+  },
+  Quiz: {
+    screen: Quiz,
     navigationOptions: {
       headerTintColor: white,
       headerStyle: {

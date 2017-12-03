@@ -1,25 +1,57 @@
 import React, { Component } from 'react'
-import { View, Text, TextInput, StyleSheet, Platform } from 'react-native'
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  Platform,
+  KeyboardAvoidingView
+} from 'react-native'
 import { black, white } from '../utils/colors'
 import TextButton from './TextButton'
+import { saveDeckTitle } from '../utils/api';
+import { NavigationActions } from 'react-navigation'
+
 
 class NewDeck extends Component{
+  state = {
+        deckTitle: ''
+    };
+
+  createDeck = () => {
+    saveDeckTitle(this.state.deckTitle)
+      .then(deck => {
+        const resetAction = NavigationActions.reset({
+          index: 1,
+          actions: [
+            NavigationActions.navigate({ routeName: 'DeckListView' }),
+          ]
+        })
+        this.props.navigation.dispatch(resetAction);
+      }
+    )
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.newDeckHeader}>
-          What is the title of your new deck?
-        </Text>
-        <TextInput
-          style={styles.deckTitle}
-          placeholder="Deck title"
-        />
-      <TextButton
-        style={[styles.button, styles.buttonBlack]}
-        onPress={console.log('oi')}>
-          Submit
-      </TextButton>
-      </View>
+      <KeyboardAvoidingView behavior={'padding'} style={{flex: 1}}>
+        <View style={styles.container}>
+          <Text style={styles.newDeckHeader}>
+            What is the title of your new deck? POrra
+          </Text>
+          <TextInput
+            style={styles.deckTitle}
+            placeholder="Deck title"
+            onChangeText={text => this.setState({deckTitle: text})}
+            autoFocus={true}
+          />
+          <TextButton
+          style={[styles.button, styles.buttonBlack]}
+          onPress={this.createDeck}>
+            Submit
+          </TextButton>
+        </View>
+      </KeyboardAvoidingView>
     )
   }
 }
